@@ -6,6 +6,7 @@ use smoltcp::{
     phy::{self, Device, DeviceCapabilities},
     time::Instant,
 };
+use core::fmt::Debug;
 
 /// Wrapper for use as a `smoltcp` interface for sending and receiving raw network frames.
 pub struct Phy<'a, SPI, NCS, INT, RESET> {
@@ -27,6 +28,7 @@ where
     NCS: OutputPin,
     INT: crate::sealed::IntPin,
     RESET: crate::sealed::ResetPin,
+    E: Debug,
 {
     type RxToken = RxToken<'a>;
     type TxToken = TxToken<'a, SPI, NCS, INT, RESET>;
